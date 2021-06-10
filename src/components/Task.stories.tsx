@@ -1,9 +1,10 @@
+import React from "react";
 import { Story } from "@storybook/react";
 import Task, { TaskProps } from "./Task";
 
 export default {
   component: Task,
-  title: "Task",
+  title: "components/Task",
 };
 
 const Template: Story<TaskProps> = (args) => <Task {...args} />;
