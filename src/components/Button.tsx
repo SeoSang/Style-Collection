@@ -1,7 +1,15 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { indigo, pink, purple, red, white } from "../styles/colors";
+import {
+  Color,
+  grey,
+  indigo,
+  pink,
+  purple,
+  red,
+  white,
+} from "../styles/colors";
 
 type ButtonProps = {
   /** 버튼 안의 내용 */
@@ -12,12 +20,27 @@ type ButtonProps = {
   theme: "primary" | "secondary" | "error" | "pink" | "purple";
   /** 버튼의 크기를 설정합니다. */
   size: "small" | "medium" | "big";
+  /** 버튼을 비활성화 시킵니다. */
+  disabled?: boolean;
+  /** 버튼의 너비를 임의로 설정합니다. */
+  width?: string | number;
 };
 
 /** 여러 테마를 가지고 있는 `Button` */
-const Button = ({ children, theme, size, onClick }: ButtonProps) => {
+const Button = ({
+  children,
+  theme,
+  disabled,
+  size,
+  onClick,
+  width,
+}: ButtonProps) => {
   return (
-    <button css={[style, themes[theme], sizes[size]]} onClick={onClick}>
+    <button
+      css={[style, themes[theme], sizes[size], { width }]}
+      disabled={disabled}
+      onClick={onClick}
+    >
       {children}
     </button>
   );
@@ -54,63 +77,35 @@ const style = css`
   :hover {
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
   }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 `;
 
+const getButtonCSS = (colorObject: Color, textColor = "white") => {
+  return css`
+    background: ${colorObject[500]};
+    color: ${textColor};
+    &:hover:enabled {
+      background: ${textColor};
+      color: ${colorObject[500]};
+    }
+    &:active:enabled {
+      background: ${colorObject[50]};
+    }
+    &:disabled {
+      color: ${colorObject[200]};
+    }
+  `;
+};
+
 const themes = {
-  primary: css`
-    background: ${indigo[500]};
-    color: white;
-    &:hover {
-      background: white;
-      color: ${indigo[500]};
-    }
-    &:active {
-      background: ${indigo[50]};
-    }
-  `,
-  secondary: css`
-    background: #e9ecef;
-    color: #343a40;
-    &:hover {
-      background: #f1f3f5;
-    }
-    &:active {
-      background: #dee2e6;
-    }
-  `,
-  error: css`
-    background: ${red[500]};
-    color: ${white};
-    &:hover {
-      background: ${white};
-      color: ${red[500]};
-    }
-    &:active {
-      background: ${red[50]};
-    }
-  `,
-  pink: css`
-    background: ${pink[500]};
-    color: ${white};
-    &:hover {
-      background: ${white};
-      color: ${pink[500]};
-    }
-    &:active {
-      background: ${pink[50]};
-    }
-  `,
-  purple: css`
-    background: ${purple[500]};
-    color: ${white};
-    &:hover {
-      background: ${white};
-      color: ${purple[500]};
-    }
-    &:active {
-      background: ${purple[50]};
-    }
-  `,
+  primary: getButtonCSS(indigo),
+  secondary: getButtonCSS(grey, "black"),
+  error: getButtonCSS(red),
+  pink: getButtonCSS(pink),
+  purple: getButtonCSS(purple),
 };
 
 const sizes = {

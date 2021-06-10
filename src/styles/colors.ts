@@ -1,4 +1,24 @@
-export const red = {
+export interface Color {
+  50: string;
+  100: string;
+  200: string;
+  300: string;
+  400: string;
+  500: string;
+  600: string;
+  700: string;
+  800: string;
+  900: string;
+}
+
+export interface ExtendedColor extends Color {
+  A100: string;
+  A200: string;
+  A400: string;
+  A700: string;
+}
+
+export const red: ExtendedColor = {
   50: "#FFEBEE",
   100: "#FFCDD2",
   200: "#EF9A9A",
@@ -15,7 +35,7 @@ export const red = {
   A700: "#D50000",
 };
 
-export const pink = {
+export const pink: ExtendedColor = {
   50: "#FCE4EC",
   100: "#F8BBD0",
   200: "#F48FB1",
@@ -31,7 +51,7 @@ export const pink = {
   A400: "#F50057",
   A700: "#C51162",
 };
-export const purple = {
+export const purple: ExtendedColor = {
   50: "#F3E5F5",
   100: "#E1BEE7",
   200: "#CE93D8",
@@ -47,7 +67,7 @@ export const purple = {
   A400: "#D500F9",
   A700: "#AA00FF",
 };
-export const deepPurple = {
+export const deepPurple: ExtendedColor = {
   50: "#EDE7F6",
   100: "#D1C4E9",
   200: "#B39DDB",
@@ -63,7 +83,7 @@ export const deepPurple = {
   A400: "#651FFF",
   A700: "#6200EA",
 };
-export const indigo = {
+export const indigo: ExtendedColor = {
   50: "#E8EAF6",
   100: "#C5CAE9",
   200: "#9FA8DA",
@@ -79,7 +99,7 @@ export const indigo = {
   A400: "#3D5AFE",
   A700: "#304FFE",
 };
-export const blue = {
+export const blue: ExtendedColor = {
   50: "#E3F2FD",
   100: "#BBDEFB",
   200: "#90CAF9",
@@ -95,7 +115,7 @@ export const blue = {
   A400: "#2979FF",
   A700: "#2962FF",
 };
-export const lightBlue = {
+export const lightBlue: ExtendedColor = {
   50: "#E1F5FE",
   100: "#B3E5FC",
   200: "#81D4FA",
@@ -111,7 +131,7 @@ export const lightBlue = {
   A400: "#00B0FF",
   A700: "#0091EA",
 };
-export const cyan = {
+export const cyan: ExtendedColor = {
   50: "#E0F7FA",
   100: "#B2EBF2",
   200: "#80DEEA",
@@ -127,7 +147,7 @@ export const cyan = {
   A400: "#00E5FF",
   A700: "#00B8D4",
 };
-export const teal = {
+export const teal: ExtendedColor = {
   50: "#E0F2F1",
   100: "#B2DFDB",
   200: "#80CBC4",
@@ -143,7 +163,7 @@ export const teal = {
   A400: "#1DE9B6",
   A700: "#00BFA5",
 };
-export const green = {
+export const green: ExtendedColor = {
   50: "#E8F5E9",
   100: "#C8E6C9",
   200: "#A5D6A7",
@@ -159,7 +179,7 @@ export const green = {
   A400: "#00E676",
   A700: "#00C853",
 };
-export const lightGreen = {
+export const lightGreen: ExtendedColor = {
   50: "#F1F8E9",
   100: "#DCEDC8",
   200: "#C5E1A5",
@@ -175,7 +195,7 @@ export const lightGreen = {
   A400: "#76FF03",
   A700: "#64DD17",
 };
-export const lime = {
+export const lime: ExtendedColor = {
   50: "#F9FBE7",
   100: "#F0F4C3",
   200: "#E6EE9C",
@@ -191,7 +211,7 @@ export const lime = {
   A400: "#C6FF00",
   A700: "#AEEA00",
 };
-export const yellow = {
+export const yellow: ExtendedColor = {
   50: "#FFFDE7",
   100: "#FFF9C4",
   200: "#FFF59D",
@@ -207,7 +227,7 @@ export const yellow = {
   A400: "#FFEA00",
   A700: "#FFD600",
 };
-export const amber = {
+export const amber: ExtendedColor = {
   50: "#FFF8E1",
   100: "#FFECB3",
   200: "#FFE082",
@@ -223,7 +243,7 @@ export const amber = {
   A400: "#FFC400",
   A700: "#FFAB00",
 };
-export const orange = {
+export const orange: ExtendedColor = {
   50: "#FFF3E0",
   100: "#FFE0B2",
   200: "#FFCC80",
@@ -239,7 +259,7 @@ export const orange = {
   A400: "#FF9100",
   A700: "#FF6D00",
 };
-export const deepOrange = {
+export const deepOrange: ExtendedColor = {
   50: "#FBE9E7",
   100: "#FFCCBC",
   200: "#FFAB91",
@@ -255,7 +275,7 @@ export const deepOrange = {
   A400: "#FF3D00",
   A700: "#DD2C00",
 };
-export const brown = {
+export const brown: Color = {
   50: "#EFEBE9",
   100: "#D7CCC8",
   200: "#BCAAA4",
@@ -267,7 +287,7 @@ export const brown = {
   800: "#4E342E",
   900: "#3E2723",
 };
-export const blueGrey = {
+export const blueGrey: Color = {
   50: "#ECEFF1",
   100: "#CFD8DC",
   200: "#B0BEC5",
@@ -279,7 +299,7 @@ export const blueGrey = {
   800: "#37474F",
   900: "#263238",
 };
-export const grey = {
+export const grey: Color = {
   50: "#FAFAFA",
   100: "#F5F5F5",
   200: "#EEEEEE",

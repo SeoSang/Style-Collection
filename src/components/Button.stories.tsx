@@ -1,14 +1,36 @@
 import css from "@emotion/css";
 import React from "react";
+import { withKnobs, text, boolean, select } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
 import Button from "./Button";
 
 export default {
   title: "components/Button",
   component: Button,
+  decorators: [withKnobs],
 };
 
 export const button = () => {
-  return <Button>BUTTON</Button>;
+  const label = text("children", "BUTTON");
+  const size = select("size", ["small", "medium", "big"], "medium");
+  const theme = select(
+    "theme",
+    ["primary", "secondary", "error", "pink", "purple"],
+    "primary"
+  );
+  const disabled = boolean("disabled", false);
+  const width = text("width", "");
+  return (
+    <Button
+      size={size}
+      theme={theme}
+      disabled={disabled}
+      width={width}
+      onClick={action("onClick")}
+    >
+      {label}
+    </Button>
+  );
 };
 
 button.story = {
@@ -57,6 +79,36 @@ export const sizes = () => {
       <div>
         <div className="description">Big</div>
         <Button size="big">BUTTON</Button>
+      </div>
+    </div>
+  );
+};
+
+export const disabled = () => {
+  return (
+    <div css={buttonWrapper}>
+      <div>
+        <Button disabled>PRIMARY</Button>
+      </div>
+      <br />
+      <div>
+        <Button disabled theme="secondary">
+          SECONDARY
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export const customSized = () => {
+  return (
+    <div css={buttonWrapper}>
+      <div>
+        <Button width="20rem">CUSTOM WIDTH</Button>
+      </div>
+      <br />
+      <div>
+        <Button width="100%">FULL WIDTH</Button>
       </div>
     </div>
   );
