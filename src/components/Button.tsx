@@ -1,15 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import {
-  Color,
-  grey,
-  indigo,
-  pink,
-  purple,
-  red,
-  white,
-} from "../styles/colors";
+import { Color, grey, indigo, pink, purple, red } from "../styles/colors";
 
 type ButtonProps = {
   /** 버튼 안의 내용 */
