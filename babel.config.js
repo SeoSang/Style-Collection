@@ -1,1 +1,4 @@
-module.exports = { presets: ["@emotion/babel-preset-css-prop"] };
+module.exports = {
+  presets: ["@emotion/babel-preset-css-prop"],
+  plugins: ["@emotion"],
+};

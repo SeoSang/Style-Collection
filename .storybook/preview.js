@@ -1,4 +1,5 @@
 import "../src/index.css";
+import { DefaultCanvasStyle } from "../src/styles/canvas";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -18,6 +19,10 @@ export const parameters = {
         value: "black",
       },
       {
+        name: "dark",
+        value: "#231e23",
+      },
+      {
         name: "twitter",
         value: "#00aced",
       },
@@ -34,3 +39,11 @@ export const parameters = {
     },
   },
 };
+
+export const decorators = [
+  (Story) => (
+    <div style={DefaultCanvasStyle}>
+      <Story />
+    </div>
+  ),
+];
