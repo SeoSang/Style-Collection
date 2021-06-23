@@ -8,6 +8,8 @@ type CardProps = {
   title: string
   /** 카드의 내용을 설정합니다. */
   content: string
+  /** 카드 hover시에 커서 스타일을 설정합니다. */
+  cursor?: Cursor
   /** 카드 이미지의 주소를 설정합니다. */
   imgSrc?: string
   /** 카드 이미지를 원형으로 표현할 것인지 설정합니다. */
@@ -32,18 +34,38 @@ type CardProps = {
 
 export type CardMode = 'default' | 'round' | 'very-round'
 
+export type Cursor =
+  | 'default'
+  | 'pointer'
+  | 'help'
+  | 'wait'
+  | 'not-allowed'
+  | 'no-drop'
+  | 'copy'
+  | 'cell'
+  | 'crosshair'
+  | 'grab'
+  | 'zoom-in'
+  | 'zoom-out'
+  | 'move'
+
 const B_R = {
   default: '0%',
   round: '4%',
   veryRound: '10%',
 }
 
-const defaultCardStyle = (disabled: boolean, mode: CardMode) => {
+const defaultCardStyle = (
+  disabled: boolean,
+  mode: CardMode,
+  cursor = 'default',
+) => {
   return css`
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
-
+    ${cursor ? `cursor : ${cursor};` : ``}
     ${disabled ? `opacity: 0.5;` : ``}
+    ${disabled ? `cursor: not-allowed;` : ``}
     ${disabled
       ? ''
       : `:hover {
@@ -93,6 +115,7 @@ export const Card = ({
   width = '400px',
   imgSrc,
   alt,
+  cursor = 'default',
   mode = 'default',
   circle = false,
   cardStyle = {},
@@ -102,7 +125,7 @@ export const Card = ({
   if (imgSrc)
     return (
       <div
-        css={[defaultCardStyle(disabled, mode), cardStyle, { width }]}
+        css={[defaultCardStyle(disabled, mode, cursor), cardStyle, { width }]}
         onClick={onClick}>
         <div css={[imgContainerStyle]}>
           <img src={imgSrc} alt={alt} css={[imageStyle(mode, circle)]} />
@@ -117,7 +140,7 @@ export const Card = ({
     )
   else
     return (
-      <div css={[defaultCardStyle(disabled, mode), { width }]}>
+      <div css={[defaultCardStyle(disabled, mode, cursor), { width }]}>
         <div css={[contentContainerStyle]}>
           <h4>
             <b>{title}</b>
