@@ -1,8 +1,25 @@
-import { grey, indigo, pink, purple, red } from './colors'
+import { blueGrey, Color, grey, indigo, pink, purple, red } from './colors'
 
-export const themeColor = {
+export const themeProps = [
+  'default',
+  'primary',
+  'secondary',
+  'error',
+  'pink',
+  'purple',
+]
+export type ThemeProps =
+  | 'default'
+  | 'primary'
+  | 'secondary'
+  | 'error'
+  | 'pink'
+  | 'purple'
+
+export const themeColor: { [key: string]: Color } = {
+  default: grey,
   primary: indigo,
-  secondary: grey,
+  secondary: blueGrey,
   error: red,
   pink: pink,
   purple: purple,
