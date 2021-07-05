@@ -1,6 +1,6 @@
 import React from 'react'
 import { withKnobs, text, boolean, select } from '@storybook/addon-knobs'
-import { Card, CardMode } from './Card'
+import { Card } from './Card'
 
 export default {
   title: 'components/Card',
