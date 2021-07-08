@@ -1,11 +1,11 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css, keyframes } from '@emotion/core'
-import React from 'react'
+import React, { HTMLProps } from 'react'
 import mediaSize from '../styles/size'
 import { themeColor, ThemeProps } from '../styles/theme'
 
-type TitleProps = {
+interface TitleProps extends HTMLProps<HTMLHeadingElement> {
   /** Title 글씨의 색깔 */
   type?: ThemeProps
   /** h1, h2, h3, h4, h5 */
@@ -90,6 +90,15 @@ const getTitleStyle = (type: ThemeProps, size: TitleSize) => css`
     line-height: ${SIZES[size].pc.lineHeight};
   }
 `
-export const Title = ({ type = 'default', size = 2, children }: TitleProps) => {
-  return <h1 css={[getTitleStyle(type, size)]}>{children}</h1>
+export const Title = ({
+  type = 'default',
+  size = 2,
+  children,
+  ...props
+}: TitleProps) => {
+  return (
+    <h1 css={[getTitleStyle(type, size)]} {...props}>
+      {children}
+    </h1>
+  )
 }

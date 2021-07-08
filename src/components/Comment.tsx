@@ -4,16 +4,30 @@ import { jsx, css } from '@emotion/core'
 import styled from '@emotion/styled'
 import { spacing } from '../styles/size'
 import Avatar from './Avatar'
+import { Title } from './Title'
+import {
+  AiOutlineLike,
+  AiFillLike,
+  AiOutlineDislike,
+  AiFillDislike,
+} from 'react-icons/ai'
+import { timeForToday } from '../utils/time'
 
 type CommentProps = {
   /** 작성자 닉네임 */
   nickName?: string
+  /** 댓글 내용 */
+  text: string
   /** 아바타의 이미지 src */
   src?: string | undefined
   /** 좋아요 수 */
   like?: number
   /** 싫어요 수 */
   dislike?: number
+  /** 좋아요 했는지 여부 */
+  liked?: boolean
+  /** 싫어요 했는지 여부  */
+  disliked?: boolean
   /** 댓글 작성 시간 */
   createdAt?: string | Date
   /** 답글 여부 */
@@ -25,9 +39,12 @@ type CommentProps = {
 const Comment = ({
   nickName = 'U',
   src,
+  text,
   like = 0,
   dislike = 0,
   createdAt = 'Sun Jul 04 2021 23:48:38 GMT+0900',
+  liked = false,
+  disliked = false,
   reComment = true,
   highlight = false,
 }: CommentProps) => {
@@ -35,13 +52,40 @@ const Comment = ({
     <CommentContainer>
       <AvatarContainer>
         <FlexDiv height="100%">
-          <Avatar text={nickName} src={src} />
+          <Avatar shape="circle" text={nickName} src={src} />
         </FlexDiv>
       </AvatarContainer>
       <TextContainer>
-        <div></div>
+        <FlexDiv justify="flex-start">
+          <Title size={5} style={{ marginRight: spacing.md.two }}>
+            {nickName}
+          </Title>
+          <p>{timeForToday(createdAt)}</p>
+        </FlexDiv>
+        <p>{text}</p>
       </TextContainer>
-      <DataContainer />
+      <DataContainer>
+        {liked ? (
+          <AiFillLike
+            style={{ marginRight: spacing.md.one, cursor: 'pointer' }}
+          />
+        ) : (
+          <AiOutlineLike
+            style={{ marginRight: spacing.md.one, cursor: 'pointer' }}
+          />
+        )}
+        <p style={{ marginRight: spacing.md.two }}>{like}</p>
+        {disliked ? (
+          <AiFillDislike
+            style={{ marginRight: spacing.md.one, cursor: 'pointer' }}
+          />
+        ) : (
+          <AiOutlineDislike
+            style={{ marginRight: spacing.md.one, cursor: 'pointer' }}
+          />
+        )}
+        <p>{dislike}</p>
+      </DataContainer>
     </CommentContainer>
   )
 }
@@ -49,28 +93,27 @@ const Comment = ({
 const CommentContainer = styled.div`
   display: grid;
   width: 100%;
-  grid-template-columns: 1fr 3fr;
-  grid-template-rows: 100px 100px;
+  background-color: #f9f9f9;
+  grid-template-columns: 0fr 3fr;
+  grid-template-rows: 50px 50px;
   grid-gap: 10px;
-  background-color: yellowgreen;
   padding: ${spacing.xs.one};
 `
 const AvatarContainer = styled.div`
   grid-column: 1;
   grid-row: 1 / 2;
-  background-color: blue;
   padding: ${spacing.xs.one};
 `
 const TextContainer = styled.div`
   grid-column: 2;
   grid-row: 1;
-  background-color: red;
   padding: ${spacing.xs.one};
 `
 const DataContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
   grid-column: 2;
   grid-row: 2;
-  background-color: green;
   padding: ${spacing.xs.one};
 `
 
