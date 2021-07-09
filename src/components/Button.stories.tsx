@@ -1,60 +1,63 @@
-import css from "@emotion/css";
-import React from "react";
-import { withKnobs, text, boolean, select } from "@storybook/addon-knobs";
-import { action } from "@storybook/addon-actions";
-import Button from "./Button";
+import css from '@emotion/css'
+import React from 'react'
+import { withKnobs, text, boolean, select, color } from '@storybook/addon-knobs'
+import { action } from '@storybook/addon-actions'
+import Button from './Button'
 
 export default {
-  title: "components/Button",
+  title: 'components/Button',
   component: Button,
   decorators: [withKnobs],
-};
+}
 
 export const button = () => {
-  const label = text("children", "BUTTON");
-  const size = select("size", ["small", "medium", "big"], "medium");
+  const label = text('label', 'BUTTON')
+  const textColor = color('textColor', '')
+  const buttonColor = color('buttonColor', '')
+  const size = select('size', ['small', 'medium', 'big'], 'medium')
   const theme = select(
-    "theme",
-    ["primary", "secondary", "error", "pink", "purple"],
-    "primary"
-  );
-  const disabled = boolean("disabled", false);
-  const width = text("width", "");
+    'theme',
+    ['primary', 'secondary', 'error', 'pink', 'purple'],
+    'primary',
+  )
+  const disabled = boolean('disabled', false)
+  const width = text('width', '')
   return (
     <Button
       size={size}
       theme={theme}
       disabled={disabled}
       width={width}
-      onClick={action("onClick")}
-    >
+      onClick={action('onClick')}
+      textColor={textColor}
+      buttonColor={buttonColor}>
       {label}
     </Button>
-  );
-};
+  )
+}
 
 button.story = {
-  name: "Default",
-};
+  name: 'Default',
+}
 
 export const primaryButton = () => {
-  return <Button>PRIMARY</Button>;
-};
+  return <Button>PRIMARY</Button>
+}
 
 export const secondaryButton = () => {
-  return <Button theme="secondary">SECONDARY</Button>;
-};
+  return <Button theme="secondary">SECONDARY</Button>
+}
 
 export const errorButton = () => {
-  return <Button theme="error">ERROR</Button>;
-};
+  return <Button theme="error">ERROR</Button>
+}
 
 export const pinkButton = () => {
-  return <Button theme="pink">PINK</Button>;
-};
+  return <Button theme="pink">PINK</Button>
+}
 export const purpleButton = () => {
-  return <Button theme="purple">PURPLE</Button>;
-};
+  return <Button theme="purple">PURPLE</Button>
+}
 
 const buttonWrapper = css`
   .description {
@@ -63,7 +66,7 @@ const buttonWrapper = css`
   & > div + div {
     margin-top: 2rem;
   }
-`;
+`
 
 export const sizes = () => {
   return (
@@ -81,8 +84,8 @@ export const sizes = () => {
         <Button size="big">BUTTON</Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export const disabled = () => {
   return (
@@ -97,8 +100,8 @@ export const disabled = () => {
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export const customSized = () => {
   return (
@@ -111,5 +114,5 @@ export const customSized = () => {
         <Button width="100%">FULL WIDTH</Button>
       </div>
     </div>
-  );
-};
+  )
+}

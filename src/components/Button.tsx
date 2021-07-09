@@ -17,6 +17,10 @@ type ButtonProps = {
   disabled?: boolean
   /** 버튼의 너비를 임의로 설정합니다. */
   width?: string | number
+  /** 버튼의 배경 색깔을 설정합니다. */
+  buttonColor?: string
+  /** 버튼의 글자 색깔을 설정합니다. */
+  textColor?: string
 }
 
 /** 여러 테마를 가지고 있는 `Button` */
@@ -27,10 +31,17 @@ const Button = ({
   size,
   onClick,
   width,
+  textColor,
+  buttonColor,
 }: ButtonProps) => {
   return (
     <button
-      css={[style, themes[theme], sizes[size], { width }]}
+      css={[
+        style,
+        themes[theme],
+        sizes[size],
+        { width, color: textColor, backgroundColor: buttonColor },
+      ]}
       disabled={disabled}
       onClick={onClick}>
       {children}
