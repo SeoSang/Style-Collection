@@ -33,6 +33,7 @@ const Button = ({
   width,
   textColor,
   buttonColor,
+  ...args
 }: ButtonProps) => {
   return (
     <button
@@ -43,7 +44,8 @@ const Button = ({
         { width, color: textColor, backgroundColor: buttonColor },
       ]}
       disabled={disabled}
-      onClick={onClick}>
+      onClick={onClick}
+      {...args}>
       {children}
     </button>
   )

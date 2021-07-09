@@ -12,6 +12,8 @@ import {
   AiFillDislike,
 } from 'react-icons/ai'
 import { timeForToday } from '../utils/time'
+import Button from './Button'
+import { useState } from 'react'
 
 type CommentProps = {
   /** 작성자 닉네임 */
@@ -30,8 +32,6 @@ type CommentProps = {
   disliked?: boolean
   /** 댓글 작성 시간 */
   createdAt?: string | Date
-  /** 답글 여부 */
-  reComment?: boolean
   /** 강조된 댓글인지 여부 */
   highlight?: boolean
 }
@@ -45,9 +45,12 @@ const Comment = ({
   createdAt = 'Sun Jul 04 2021 23:48:38 GMT+0900',
   liked = false,
   disliked = false,
-  reComment = true,
   highlight = false,
 }: CommentProps) => {
+  const [recommentOpened, setRecommentOpen] = useState<boolean>(false)
+  const onClickRecomment = () => {
+    setRecommentOpen((ro) => !ro)
+  }
   return (
     <CommentContainer>
       <AvatarContainer>
@@ -65,26 +68,50 @@ const Comment = ({
         <p>{text}</p>
       </TextContainer>
       <DataContainer>
-        {liked ? (
-          <AiFillLike
-            style={{ marginRight: spacing.md.one, cursor: 'pointer' }}
-          />
+        <FlexDiv justify="flex-start">
+          {liked ? (
+            <AiFillLike
+              style={{ marginRight: spacing.md.one, cursor: 'pointer' }}
+            />
+          ) : (
+            <AiOutlineLike
+              style={{ marginRight: spacing.md.one, cursor: 'pointer' }}
+            />
+          )}
+          <p style={{ marginRight: spacing.md.two }}>{like}</p>
+          {disliked ? (
+            <AiFillDislike
+              style={{ marginRight: spacing.md.one, cursor: 'pointer' }}
+            />
+          ) : (
+            <AiOutlineDislike
+              style={{ marginRight: spacing.md.one, cursor: 'pointer' }}
+            />
+          )}
+          <p style={{ marginRight: spacing.md.two }}>{dislike}</p>
+          <Button
+            buttonColor="#476072"
+            textColor="#EEEEEE"
+            size="small"
+            onClick={onClickRecomment}>
+            답글 달기
+          </Button>
+        </FlexDiv>
+        {recommentOpened ? (
+          <FlexDiv justify="flex-start" direction="column">
+            <input></input>
+            <FlexDiv justify="flex-end">
+              <Button size="small" theme="error">
+                취소
+              </Button>
+              <Button size="small" theme="primary">
+                답글
+              </Button>
+            </FlexDiv>
+          </FlexDiv>
         ) : (
-          <AiOutlineLike
-            style={{ marginRight: spacing.md.one, cursor: 'pointer' }}
-          />
+          ''
         )}
-        <p style={{ marginRight: spacing.md.two }}>{like}</p>
-        {disliked ? (
-          <AiFillDislike
-            style={{ marginRight: spacing.md.one, cursor: 'pointer' }}
-          />
-        ) : (
-          <AiOutlineDislike
-            style={{ marginRight: spacing.md.one, cursor: 'pointer' }}
-          />
-        )}
-        <p>{dislike}</p>
       </DataContainer>
     </CommentContainer>
   )
@@ -95,7 +122,7 @@ const CommentContainer = styled.div`
   width: 100%;
   background-color: #f9f9f9;
   grid-template-columns: 0fr 3fr;
-  grid-template-rows: 50px 50px;
+  grid-template-rows: 50px minmax(50px, auto);
   grid-gap: 10px;
   padding: ${spacing.xs.one};
 `
@@ -111,7 +138,9 @@ const TextContainer = styled.div`
 `
 const DataContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
   grid-column: 2;
   grid-row: 2;
   padding: ${spacing.xs.one};
