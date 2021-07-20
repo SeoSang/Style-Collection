@@ -6,7 +6,7 @@
   <div style="display:flex; flex-direction:column; align-items:center; justify-content: center;">
     Style-collection for storing UI collections and practicing Three JS. (by SeoSang)
     <br/>
-    <a href="#" target="_blank">Try it now!</a>
+    <a href="https://60f67dd57e8813003b9e6b51-lbfvnlgwvx.chromatic.com/?path=/story/components-avatar--avatar" target="_blank">Try it now!</a>
   </div>
 <br>
 
@@ -19,7 +19,7 @@
 
 ## About The Project
 
-_Project URL (TBD)_
+- [URL](https://60f67dd57e8813003b9e6b51-lbfvnlgwvx.chromatic.com/?path=/story/components-avatar--avatar)
 
 ### Key Features
 
